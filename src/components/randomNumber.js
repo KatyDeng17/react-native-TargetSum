@@ -5,6 +5,7 @@ import PropTypes from 'prop-types';
 export default class RandomNumber extends React.Component{
   static propTypes = {
     number: PropTypes.number.isRequired,
+    isSelected: PropTypes.bool.isRequired,
   };
   handlePress = ()=>{
     console.log(this.props.number);
@@ -12,7 +13,7 @@ export default class RandomNumber extends React.Component{
   render(){
     return(
       <TouchableOpacity onPress={this.handlePress}>
-        <Text style={styles.randomNum} >{this.props.number}</Text>
+        <Text style={[styles.randomNum, this.props.isSelected && styles.selected]} >{this.props.number}</Text>
       </TouchableOpacity>
     );
   }
@@ -26,6 +27,8 @@ const styles = StyleSheet.create({
     marginHorizontal: 15,
     marginVertical: 25,
     textAlign:'center',
-  
-  }
+  },
+  selected:{
+    opacity: 0.3,
+  },
 });

@@ -6,22 +6,27 @@ export default class Game extends React.Component{
   static propTypes = {
     randomNumberCount: PropTypes.number.isRequired,
   };
-
+  state = {
+    selectedNumbers:[0,3],
+  }
   randomNumbers = Array.from({length: this.props.randomNumberCount}).map(()=> 1 + Math.floor(10 * Math.random()));
 
   // target = 10 + Math.floor(40* Math.random());
   target = this.randomNumbers
     .slice(0,this.props.randomNumberCount - 2)
     .reduce((acc, curr) => acc + curr, 0);
-
+  isNumberSelected = (numberIndex) =>{
+    return this.state.selectedNumbers.indexOf(numberIndex) >= 0;
+  }
   render(){
     return(
       <View style={styles.container}>
         <Text style={styles.target}>{this.target}</Text>
         <View style={styles.randomContainer}>
           {this.randomNumbers.map((randomNumber,index)=>
-          
-            <RandomNumber key={index} number={randomNumber}/>
+            <RandomNumber key={index} number={randomNumber} 
+              isSelected={this.isNumberSelected(index)}
+            />
           )}
         </View>
       </View>
