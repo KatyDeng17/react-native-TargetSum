@@ -12,7 +12,7 @@ import Game from './src/components/game';
 export default class App extends React.Component{
   render(){
     return(
-      <Game />
+      <Game randomNumberCount={6}/>
    
 
     );
